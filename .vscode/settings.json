@@ -4,6 +4,7 @@
         "docker",
         "main",
         "env",
-        "api"
+        "api",
+        "server"
     ]
 }
