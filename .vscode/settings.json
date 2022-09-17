@@ -1,0 +1,9 @@
+{
+    "conventionalCommits.scopes": [
+        "model",
+        "docker",
+        "main",
+        "env",
+        "api"
+    ]
+}
