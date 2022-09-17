@@ -3,6 +3,7 @@
         "model",
         "docker",
         "main",
-        "env"
+        "env",
+        "api"
     ]
 }
