@@ -65,6 +65,30 @@ func CreateGoly(c *fiber.Ctx) error {
 	return c.Status(fiber.StatusOK).JSON(goly)
 }
 
+func updateGoly(c *fiber.Ctx) error {
+	c.Accepts("application/json")
+
+	var goly model.Goly
+
+	err := c.BodyParser(&goly)
+
+	if err != nil {
+		return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{
+			"message": "could not parse JSON " + err.Error(),
+		})
+	}
+
+	err = model.UpdateGoly(goly)
+
+	if err != nil {
+		return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{
+			"message": "could not update goly link " + err.Error(),
+		})
+	}
+
+	return c.Status(fiber.StatusOK).JSON(goly)
+}
+
 func SetupAndListen() {
 	router := fiber.New()
 
@@ -74,7 +98,8 @@ func SetupAndListen() {
 	}))
 
 	router.Get("/goly", getAllGolies)
-	router.Get("/gold/{id}", getGoly)
+	router.Get("/gold/:id", getGoly)
 	router.Post("/goly", CreateGoly)
+	router.Patch("/goly", updateGoly)
 	router.Listen(":3000")
 }
