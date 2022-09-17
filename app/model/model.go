@@ -2,7 +2,10 @@ package model
 
 import (
 	"fmt"
+	"log"
+	"os"
 
+	"github.com/joho/godotenv"
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
 )
@@ -18,7 +21,21 @@ type Goly struct {
 }
 
 func Setup() {
-	dsn := "host=localhost user=admin password=test dbname=db port=5432 sslmode=disable"
+	// load .env file from given path
+	// we keep it empty it will load .env from current directory
+	enverr := godotenv.Load(".env")
+
+	if enverr != nil {
+		log.Fatalf("Error loading .env file")
+	}
+
+	// getting env variables
+	dbUsername := "user=" + os.Getenv("DB_USERNAME") + " "
+	dbPassword := "password=" + os.Getenv("DB_PASSWORD") + " "
+	dbName := "dbname=" + os.Getenv("DB_NAME") + " "
+	dbHost := "host=" + os.Getenv("DB_HOST") + " "
+
+	dsn := dbHost + dbUsername + dbName + dbPassword + " port=5432 sslmode=disable"
 	var err error
 	db, err = gorm.Open(postgres.Open(dsn), &gorm.Config{})
 
