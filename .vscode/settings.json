@@ -2,6 +2,7 @@
     "conventionalCommits.scopes": [
         "model",
         "docker",
-        "main"
+        "main",
+        "env"
     ]
 }
