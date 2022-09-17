@@ -1,0 +1,5 @@
+package goly
+
+func main() {
+
+}
