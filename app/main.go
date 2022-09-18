@@ -2,7 +2,7 @@ package main
 
 import (
 	"goly/model"
-	"goly/utils/server"
+	"goly/server"
 )
 
 func main() {
