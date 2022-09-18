@@ -4,6 +4,7 @@
 
   interface Goly {
     id: number
+    description: string
     redirect: string
     goly: string
     clicked: number
@@ -11,6 +12,7 @@
 }
 
   const url = ref<string>()
+  const description = ref<string>()
   const random = ref<string>()
   const golies = ref<Goly[]>([])
   const checked = ref(true)
@@ -25,6 +27,7 @@
 
   async function createGoly() {
         const json = {
+            description: description.value,
             redirect: url.value,
             goly: random.value,
             random: checked.value,
@@ -56,6 +59,11 @@
         type="text" id="url"
         placeholder="url" 
         v-model="url">
+        <input 
+        class="modal-input"
+        type="text" id="description"
+        placeholder="description" 
+        v-model="description">
       <input 
         class="modal-input"
         type="text"
@@ -73,11 +81,16 @@
   </div>
 </template>
 
-<style scoped>
+<style scoped lang="scss">
 .modal-wrapper {
   display: flex;
+  flex-direction: column;
   gap: 1em;
   align-items: center;
+
+  @media only screen and (min-width: 800px) {
+    flex-direction: row;
+  }
 }
 
 .golies-wrapper {
@@ -87,10 +100,12 @@
 }
 
 .modal-input {
+  width: 100%;
   padding: 0.75em 1.2em;
 }
 
 button {
+  width: 100%;
   padding: 0.75em 1.2em;
 }
 </style>

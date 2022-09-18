@@ -3,6 +3,7 @@ import { ref } from 'vue'
 
 interface Goly {
     id: number
+    description: string
     redirect: string
     goly: string
     clicked: number
@@ -29,6 +30,7 @@ const deleteGoly = async() => {
 <template>
     <div class="goly-wrapper" v-if="show">
         <p>url: <a :href="`http://localhost:3000/r/${props.goly.goly}`">http://localhost:3000/r/{{ props.goly.goly }}</a></p>
+        <p>description: {{ props.goly.description }}</p>
         <p>redirect: {{ props.goly.redirect }}</p>
         <p>clicked: {{ props.goly.clicked }}</p>
     <button @click="deleteGoly">Delete</button>
@@ -44,7 +46,7 @@ const deleteGoly = async() => {
     flex-direction: column;
     gap: 5px;
     margin-top: 10px;
-    max-width: 580px;
+    max-width: 753px;
 }
 
 p {
