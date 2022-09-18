@@ -44,6 +44,7 @@ const deleteGoly = async() => {
     flex-direction: column;
     gap: 5px;
     margin-top: 10px;
+    max-width: 580px;
 }
 
 p {
