@@ -13,7 +13,7 @@
   const url = ref<string>()
   const random = ref<string>()
   const golies = ref<Goly[]>([])
-  const checked = ref(false)
+  const checked = ref(true)
 
   const getGolies = async() => {
     const res = await fetch('http://localhost:3000/goly')
@@ -30,13 +30,15 @@
             random: checked.value,
         }
 
-        await fetch('http://localhost:3000/goly', {
-            method: 'POST',
-            headers: {"Content-Type": "application/json"},
-            body: JSON.stringify(json),   
-        }).then(async() => {
-            await getGolies()
-        })
+        if (json.redirect) {
+          await fetch('http://localhost:3000/goly', {
+              method: 'POST',
+              headers: {"Content-Type": "application/json"},
+              body: JSON.stringify(json),   
+          }).then(async() => {
+              await getGolies()
+          })
+      }
     }
 
   onMounted( () => {
@@ -59,12 +61,15 @@
         type="text"
         id="random" 
         placeholder="random"
+        :disabled="checked"
         v-model="random">
       <input type="checkbox" v-model="checked">
       <button @click="createGoly">Add</button>
   </div>
-  <div v-for="goly in golies" :key="goly.id">
-    <Goly :goly="goly"/>
+  <div class="golies-wrapper">
+    <div v-for="goly in golies" :key="goly.id">
+      <Goly :goly="goly"/>
+    </div>
   </div>
 </template>
 
@@ -73,6 +78,12 @@
   display: flex;
   gap: 1em;
   align-items: center;
+}
+
+.golies-wrapper {
+  max-height: 500px;
+  overflow: auto;
+  margin-top: 10px;
 }
 
 .modal-input {

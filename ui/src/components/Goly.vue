@@ -27,15 +27,26 @@ const deleteGoly = async() => {
 </script>
 
 <template>
-    <div v-if="show">
-        id: {{ props.goly.id }}
-        url: <a :href="`http://localhost:3000/r/${props.goly.goly}`">http://localhost:3000/r/{{ props.goly.goly }}</a>
-        redirect: {{ props.goly.redirect }}
-        clicked: {{ props.goly.clicked }}
+    <div class="goly-wrapper" v-if="show">
+        <p>url: <a :href="`http://localhost:3000/r/${props.goly.goly}`">http://localhost:3000/r/{{ props.goly.goly }}</a></p>
+        <p>redirect: {{ props.goly.redirect }}</p>
+        <p>clicked: {{ props.goly.clicked }}</p>
     <button @click="deleteGoly">Delete</button>
     </div>
 </template>
 
 <style scoped>
+.goly-wrapper {
+    background-color: rgb(46, 45, 45);
+    display: flex;
+    padding: 1em;
+    border-radius: 4px;
+    flex-direction: column;
+    gap: 5px;
+    margin-top: 10px;
+}
 
+p {
+    margin: unset;
+}
 </style>
