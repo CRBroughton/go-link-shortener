@@ -10,8 +10,8 @@
     random: string
 }
 
-  const url = ref()
-  const random = ref()
+  const url = ref<string>()
+  const random = ref<string>()
   const golies = ref<Goly[]>([])
   const checked = ref(false)
 
@@ -23,7 +23,7 @@
     })
   }
 
-  async function createGoly(data: any) {
+  async function createGoly() {
         const json = {
             redirect: url.value,
             goly: random.value,
@@ -34,7 +34,7 @@
             method: 'POST',
             headers: {"Content-Type": "application/json"},
             body: JSON.stringify(json),   
-        }).then(async(res) => {
+        }).then(async() => {
             await getGolies()
         })
     }
