@@ -145,6 +145,6 @@ func SetupAndListen() {
 	router.Get("/gold/:id", getGoly)
 	router.Post("/goly", CreateGoly)
 	router.Patch("/goly", updateGoly)
-	router.Delete("/gold/:id", deleteGoly)
+	router.Delete("/goly/:id", deleteGoly)
 	router.Listen(":3000")
 }

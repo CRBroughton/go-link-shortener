@@ -5,6 +5,7 @@
         "main",
         "env",
         "api",
-        "server"
+        "server",
+        "ui"
     ]
 }
