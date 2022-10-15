@@ -41,11 +41,14 @@ func Setup() {
 	db, err = gorm.Open(postgres.Open(dsn), &gorm.Config{})
 
 	if err != nil {
-		panic(err)
+		log.Fatal("Failed to connect to database")
 	}
 
+	log.Println("Running migrations...")
 	err = db.AutoMigrate(&Goly{})
 	if err != nil {
 		fmt.Println(err)
 	}
+	log.Println("Migrations completed")
+
 }
